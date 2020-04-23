@@ -1,24 +1,27 @@
 #!/bin/bash
 
-DOKKU_LOCAL_BRANCH=${DOKKU_LOCAL_BRANCH:-$GITHUB_SHA}
+SET -eu
+
+echo '👍 ENTRYPOINT HAS STARTED'
+DOKKU_LOCAL_BRANCH=${INPUT_DOKKU_LOCAL_BRANCH:-$GITHUB_SHA}
 
 echo ${DOKKU_LOCAL_BRANCH}
 
 # Setup the SSH environment
 mkdir -p ~/.ssh
 eval `ssh-agent -s`
-ssh-add - <<< "${SSH_PRIVATE_KEY}"
-ssh-keyscan $DOKKU_HOST >> ~/.ssh/known_hosts
+ssh-add - <<< "${INPUT_SSH_PRIVATE_KEY}"
+ssh-keyscan $INPUT_DOKKU_HOST >> ~/.ssh/known_hosts
 
 # Setup the git environment
-git_repo="${DOKKU_USER}@${DOKKU_HOST}:${DOKKU_APP_NAME}"
+git_repo="${INPUT_DOKKU_USER}@${INPUT_DOKKU_HOST}:${INPUT_DOKKU_APP_NAME}"
 cd "${GITHUB_WORKSPACE}"
 git remote add deploy "${git_repo}"
 
 # Prepare to push to Dokku git repository
-REMOTE_REF="${DOKKU_LOCAL_BRANCH}:refs/heads/${DOKKU_REMOTE_BRANCH}"
+REMOTE_REF="${DOKKU_LOCAL_BRANCH}:refs/heads/${INPUT_DOKKU_REMOTE_BRANCH}"
 
-GIT_COMMAND="git push deploy ${REMOTE_REF} ${GIT_PUSH_FLAGS}"
+GIT_COMMAND="git push deploy ${REMOTE_REF} ${INPUT_GIT_PUSH_FLAGS}"
 echo "GIT_COMMAND=${GIT_COMMAND}"
 
 # Push to Dokku git repository

@@ -4,6 +4,32 @@ description: "Deploy to a dokku instance using Github actions"
 branding:
   icon: "upload-cloud"
   color: "green"
+inputs:
+  ssh-private-key:
+    description: "The ssh private key to the dokku instance. WARNING: use a secret! Do not pass a plain text value!"
+    required: true
+  dokku-host:
+    description: "The dokku host to ssh into"
+    required: true
+  app-name:
+    description: "The dokku app name"
+    required: true
+  dokku-user:
+    description: "The user to use for ssh (Default: dokku)"
+    required: false
+    default: "dokku"
+  remote-branch:
+    description: "The branch to push on the remote repository (Default: master)"
+    required: false
+    default: "master"
+  local-branch:
+    description: "The branch to push to the remote repository from (Default: master)"
+    required: false
+    default: "master"
+  git-push-flags:
+    description: "Additional flags to be passed to the git push command. Could be used to force push"
+    required: false
+    default: ""
 runs:
   using: "docker"
   image: "Dockerfile"
