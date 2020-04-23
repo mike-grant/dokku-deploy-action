@@ -2,6 +2,8 @@
 
 DOKKU_LOCAL_BRANCH=${DOKKU_LOCAL_BRANCH:-$GITHUB_SHA}
 
+echo ${DOKKU_LOCAL_BRANCH}
+
 # Setup the SSH environment
 mkdir -p ~/.ssh
 eval `ssh-agent -s`
