@@ -11,7 +11,7 @@ inputs:
   dokku-host:
     description: "The dokku host to ssh into"
     required: true
-  app-name:
+  dokku-app-name:
     description: "The dokku app name"
     required: true
   dokku-user:
