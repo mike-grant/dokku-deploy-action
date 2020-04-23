@@ -26,8 +26,6 @@ inputs:
     description: "Additional flags to be passed to the git push command. Could be used to force push"
     required: false
     default: ""
-  local-branch:
-
 runs:
   using: "docker"
   image: "Dockerfile"
