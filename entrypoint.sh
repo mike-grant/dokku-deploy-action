@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SET -eu
+set -eu
 
 echo '👍 ENTRYPOINT HAS STARTED'
 DOKKU_LOCAL_BRANCH=${INPUT_DOKKU_LOCAL_BRANCH:-$GITHUB_SHA}
