@@ -5,7 +5,7 @@ SET -eu
 echo '👍 ENTRYPOINT HAS STARTED'
 DOKKU_LOCAL_BRANCH=${INPUT_DOKKU_LOCAL_BRANCH:-$GITHUB_SHA}
 
-echo ${DOKKU_LOCAL_BRANCH}
+echo ${INPUT_DOKKU_LOCAL_BRANCH}
 
 # Setup the SSH environment
 mkdir -p ~/.ssh
