@@ -3,15 +3,15 @@
 set -eu
 
 echo '👍 ENTRYPOINT HAS STARTED'
-DOKKU_LOCAL_BRANCH=${INPUT-DOKKU-LOCAL-BRANCH:-$GITHUB_SHA}
-
+DOKKU_LOCAL_BRANCH=${INPUT-DOKKU-LOCAL-BRANCH:$GITHUB_SHA}
+echo ${INPUT-DOKKU-LOCAL-BRANCH}
 echo ${DOKKU_LOCAL_BRANCH}
 
 # Setup the SSH environment
 mkdir -p ~/.ssh
 eval `ssh-agent -s`
 ssh-add - <<< "${INPUT_SSH-PRIVATE-KEY}"
-ssh-keyscan $INPUT_DOKKU_HOST >> ~/.ssh/known_hosts
+ssh-keyscan $INPUT_DOKKU-HOST >> ~/.ssh/known_hosts
 
 # Setup the git environment
 git_repo="${INPUT_DOKKU-USER}@${INPUT_DOKKU-HOST}:${INPUT_DOKKU-APP-NAME}"
