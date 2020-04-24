@@ -33,3 +33,11 @@ inputs:
 runs:
   using: "docker"
   image: "Dockerfile"
+  args:
+    - ${{ inputs.ssh-private-key }}
+    - ${{ inputs.dokku-host }}
+    - ${{ inputs.dokku-app-name }}
+    - ${{ inputs.dokku-user }}
+    - ${{ inputs.dokku-remote-branch }}
+    - ${{ inputs.dokku-local-branch }}
+    - ${{ inputs.git-push-flags }}
